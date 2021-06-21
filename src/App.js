@@ -1,7 +1,7 @@
 import React, { Component } from "react"
-import Ingredient from "./IngredientList.jsx"
+import IngredientList from "./IngredientList.jsx"
 
-const ingredientData = [
+const ingredients = [
     {name: 'Kaiser Bun', color: 'saddlebrown'},
     {name: 'Sesame Bun', color: 'sandybrown'},
     {name: 'Gluten Free Bun', color: 'peru'},
@@ -19,15 +19,10 @@ const ingredientData = [
 
 class App extends Component {
   render(){
-    const ingredients = ingredientData.map((ingredient, index) => {
-      return <Ingredient
-      name={ingredient.name}
-      color={ingredient.color}
-      />
-    })
     return(
-      <div>
-        {ingredients}
+      <div style={{display: "flex", alignItems:"flex-end" }}>
+        <IngredientList ingredients={ingredients}/>
+				<h1>Burger Pane</h1>
       </div>
     )
   }
