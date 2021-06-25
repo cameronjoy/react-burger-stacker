@@ -1,5 +1,7 @@
-import React, { Component } from "react"
+import React, {useState} from "react"
 import IngredientList from "./IngredientList.jsx"
+import BurgerPane from './BurgerPane'
+import { useEffect } from "react"
 
 const ingredients = [
     {name: 'Kaiser Bun', color: 'saddlebrown'},
@@ -17,15 +19,39 @@ const ingredients = [
   
 ]
 
-class App extends Component {
-  render(){
+function App (props) {
+
+  // constructor(props){
+  //   super()
+  //   this.state = {
+  //     clickedIngredients: []
+  //   }
+  // }
+
+  const [clickedIngredients, setClickedIngredients] = useState([])
+
+  const addToBurger = (e) => {
+    //get value of clicked ingredient and color
+    const newIngredient = {name: e.target.innerText , color: e.target.style.backgroundColor}
+    //create a new array with current clickedIngredients status and append new ingredient
+    const updatedClickedIngredients = clickedIngredients.concat(newIngredient)
+    //setState with new clickedIngredients array
+    setClickedIngredients( updatedClickedIngredients )
+  }
+
+  const clearBurger = (e) => {
+    setClickedIngredients([])
+  }
+
+
+ 
     return(
       <div style={{display: "flex", alignItems:"flex-end" }}>
-        <IngredientList ingredients={ingredients}/>
-				<h1>Burger Pane</h1>
+        <IngredientList ingredients={ingredients} addToBurger={addToBurger}/>
+				<BurgerPane clickedIngredients={clickedIngredients} clearBurger={clearBurger}/>
       </div>
     )
   }
-}
+
 
 export default App;
